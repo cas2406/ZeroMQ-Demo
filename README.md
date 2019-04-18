@@ -40,7 +40,7 @@ This basically means that the interpreter that converts the code into machine co
 But how does python execute two threads at the same time then? well it doesn't, what it actually does is switch very fast
 between the different threads. Which makes it seem like the two threads run in parallel.
 
-When high performance or true multi-threading is of the essence, one could use the architecture as used in this repository.
+When high performance or true multi-threading is of the essence, one could use the architecture as described in this repository.
 Here two different programs run independently of each other with each their own interpreter. 
 Because they each have their one interpreter they run truely in parallel. Using ZeroMQ the two programs are still
 able to communicate with each other.
