@@ -35,7 +35,7 @@ Now some might say, well why won't you use multi-threading?.
 multi-threading means that the computer executes multiple tasks in parallel (at the same time).
 well now the robot arm and webcam stream wil move and display at the same time but not quite as fast as you would might expect.
 This is because python can't really multi-thread. 
-Python makes use of a so called Gloabl intpreter lock (GIL).
+Python makes use of a so called Global intpreter lock (GIL).
 This basically means that the interpreter that converts the code into machine code can only work on one thread ( or "program" at a time).
 But how does python execute two threads at the same time then? well it doesn't, what it actually does is switch very fast
 between the different threads. Which makes it seem like the two threads run in parallel.
