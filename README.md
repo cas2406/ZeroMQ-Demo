@@ -2,7 +2,7 @@ ZeroMQ Demo
 
 This is just a small demo to show how you could use zeromq to communicate between multiple process. 
 
-For some more info on zeromq see: http://zeromq.org/topics:omq-is-just-sockets
+For some more info on zeromq, and why it is not just tcp sockets see: http://zeromq.org/topics:omq-is-just-sockets
 
 To run the demo run main.py and robot.py in two different consoles
 
