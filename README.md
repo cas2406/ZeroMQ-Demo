@@ -7,6 +7,7 @@ For some more info on zeromq, and why it is not just tcp sockets see: http://zer
 To run the demo run main.py and robot.py in two different consoles
 
 ---------------------------------------------------------------------
+[WORK IN PROGRESS]
 [ANY FEEDBACK IS WELCOME]
 
 Below i will explain why i chose for creating two different programs that run separately and communicate over ZeroMQ.
