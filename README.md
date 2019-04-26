@@ -34,19 +34,34 @@ When you would try to display the webcam stream and move the arm at the same tim
 you will see that the webcam stream will hang when the robot arm is moving.
 This is because the program can only do one task at a time. 
 
-Now some might say, well why won't you use multi-threading?.
+[the part below assumes the cpython interpreter is used, which is the most common interpreter]
+[this is the interpreter you download when, downloading from https://www.python.org/]
+
+Now some might say, well why won't you use multi-threading? 
 multi-threading means that the computer executes multiple tasks in parallel (at the same time).
 well now the robot arm and webcam stream wil move and display at the same time but not quite as fast as you would might expect.
-This is because python can't really multi-thread. 
-Python makes use of a so called Global intpreter lock (GIL).
-This basically means that the interpreter that converts the code into machine code can only work on one thread at a time( or "program" at a time).
+This is because python can't really multi-thread. This is because threads in python use the same memory heap for every thread.
+The problem that arises with this shared memory, is that every thread can read or write to the same memory location at the same time.
+To overcome this problem python uses the so called Global intpreter lock (GIL). This GIL makes sure that only one thread at a time can
+access the heap. The GIL does this by locking access, this prevents the other threads from operating.
+This basically means that only work on one thread at a time.
 But how does python execute two threads at the same time then? well it doesn't, what it actually does is switch very fast
 between the different threads. Which makes it seem like the two threads run in parallel.
 
-When high performance or true multi-threading is of the essence, one could use the architecture as described in this repository.
-Here two different programs run independently of each other with each their own interpreter. 
-Because they each have their one interpreter they run truely in parallel. Using ZeroMQ the two programs are still
-able to communicate with each other.
+ok but what about the multiprocessing library?
+when using the multiprocessing library, python creates a subprocess for each "thread".
+Each subprocess has it's own memory space and runs on a separate core of the cpu. This bypass the GIL limitations.
+So the threads run truely in parallel.
+
+So why use ZeroMQ then?
+by using the architecture as described in this repository you are actually doing the same as the multiprocessing library.
+As there are two separate process with each their own memory space. 
+What ZeroMQ does in this architecture is provide an easy way to communicate between these processes. 
+Using ZeroMQ you can easily send all types of variables or when combining with google's protobuf entire class objects.
+You are also able to run processes on different computers as you can send data easily over the network.
+For example you can have an low power computer like an raspberry pi aquire data which it can then send to 
+an more powerfull device which wil process the data.
+It is also allows you to create all kinds of network topologies.
 
 sources:
 https://wiki.python.org/moin/GlobalInterpreterLock
@@ -55,3 +70,4 @@ https://www.vanguardsw.com/dphelp4/dph00296.htm
 https://en.wikipedia.org/wiki/Global_interpreter_lock
 https://indianpythonista.wordpress.com/2018/01/04/how-python-runs/
 https://stackoverflow.com/questions/3265357/compiled-vs-interpreted-languages
+https://blog.usejournal.com/multithreading-vs-multiprocessing-in-python-c7dc88b50b5b
