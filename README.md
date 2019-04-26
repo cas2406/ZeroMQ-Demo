@@ -41,7 +41,7 @@ Now some might say, well why won't you use multi-threading?
 multi-threading means that the computer executes multiple tasks in parallel (at the same time).
 well now the robot arm and webcam stream wil move and display at the same time but not quite as fast as you would might expect.
 This is because python can't really multi-thread. This is because threads in python use the same memory heap for every thread.
-The problem that arises with this shared memory, is that every thread can read or write to the same memory location at the same time.
+The problem that arises with this shared memory, is that every thread can read or write to the same memory location at the same time. Which can cause unexpected behavior or causes crashes due to memory reodering by the processor.
 To overcome this problem python uses the so called Global intpreter lock (GIL). This GIL makes sure that only one thread at a time can
 access the heap. The GIL does this by locking access, this prevents the other threads from operating.
 This basically means that only work on one thread at a time.
